@@ -1,0 +1,13 @@
+#----------------------------------------------------------------#
+#Warp to gold. 
+Note:- not sure how it works, projects left for now
+#----------------------------------------------------------------#
+
+def warp_to_gold(gold_mfcc,mfcc):
+    D, wp = librosa.sequence.dtw(gold_mfcc, mfcc)
+    unique_keys, indices = np.unique(wp[:,0], return_index=True)
+    wp = wp[np.sort(indices)[::-1]]
+    mfcc  = mfcc[:,wp[:,1]]
+    return(mfcc)
+    
+out = warp_to_gold(gold_mfcc,mfcc)
